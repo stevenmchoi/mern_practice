@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
+// To store session in external database instead of cookie,
+//   use 'express-session'
+// https://www.udemy.com/node-with-react-fullstack-web-development/learn/v4/t/lecture/7603052
 const passport = require('passport');
 const keys = require('./config/keys.js');
 
