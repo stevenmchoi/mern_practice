@@ -21,7 +21,7 @@ passport.use(
 			clientID: keys.googleClientID,
 			clientSecret: keys.googleClientSecret,
 			callbackURL: '/auth/google/callback',
-			proxy: true,
+			proxy: true, // Use 'https' for Heroku proxy calls
 		},
 
 		(accessToken, refreshToken, profile, done) => {
@@ -30,7 +30,7 @@ passport.use(
 					done(null, existingUser);
 				} else {
 					new User({ googleId: profile.id })
-						.save()
+						.save() // Saved to MongoDB
 						.then((user) => done(null, user));
 				}
 			});
