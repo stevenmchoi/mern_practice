@@ -5,16 +5,6 @@ const keys = require('../config/keys.js');
 
 const User = mongoose.model('users');
 
-passport.serializeUser((user, done) => {
-	done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-	User.findById(id).then((user) => {
-		done(null, user);
-	});
-});
-
 passport.use(
 	new GoogleStrategy(
 		{
@@ -37,3 +27,16 @@ passport.use(
 		}
 	)
 );
+
+// After creating/finding User in DB, pass from server the User ID
+//   associated with the DB, NOT the Google profile ID
+passport.serializeUser((user, done) => {
+	done(null, user.id);
+});
+
+// When checking an action by a User, check its User ID and return User itself
+passport.deserializeUser((id, done) => {
+	User.findById(id).then((user) => {
+		done(null, user);
+	});
+});
