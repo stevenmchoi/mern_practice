@@ -14,16 +14,17 @@ passport.use(
 			proxy: true, // Use 'https' for Heroku proxy calls
 		},
 
-		(accessToken, refreshToken, profile, done) => {
-			User.findOne({ googleId: profile.id }).then((existingUser) => {
-				if (existingUser) {
-					done(null, existingUser);
-				} else {
-					new User({ googleId: profile.id })
-						.save() // Saved to MongoDB
-						.then((user) => done(null, user));
-				}
-			});
+		async (accessToken, refreshToken, profile, done) => {
+			const existingUser = await User.findOne({ googleId: profile.id });
+
+			// If old User
+			if (existingUser) {
+				return done(null, existingUser);
+			}
+
+			// If new User, create/save new User to MongoDB
+			const user = await new User({ googleId: profile.id }).save();
+			done(null, user);
 		}
 	)
 );
@@ -35,8 +36,8 @@ passport.serializeUser((user, done) => {
 });
 
 // When checking an action by a User, check its User ID and return User itself
-passport.deserializeUser((id, done) => {
-	User.findById(id).then((user) => {
-		done(null, user);
-	});
+passport.deserializeUser(async (id, done) => {
+	// Check if User exists in MongoDB
+	const user = await User.findById(id);
+	done(null, user);
 });
