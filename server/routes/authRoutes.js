@@ -19,7 +19,7 @@ module.exports = (app) => {
 
 	// For logout
 	app.get('/api/logout', (req, res) => {
-		req.logout();
+		req.logout(); // Provided by Passport
 		res.redirect('/');
 	});
 
