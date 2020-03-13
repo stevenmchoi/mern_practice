@@ -13,9 +13,16 @@ passport.use(
             callbackURL: '/auth/google/callback',
         },
         (accessToken, refreshToken, profile, done) => {
-            new User({
+            User.findOne({
                 googleId: profile.id,
-            }).save();
+            }).then((existingUser) => {
+                if (existingUser) {
+                } else {
+                    new User({
+                        googleId: profile.id,
+                    }).save();
+                }
+            });
         }
     )
 );
