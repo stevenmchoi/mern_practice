@@ -17,10 +17,13 @@ passport.use(
                 googleId: profile.id,
             }).then((existingUser) => {
                 if (existingUser) {
+                    done(null, existingUser);
                 } else {
                     new User({
                         googleId: profile.id,
-                    }).save();
+                    })
+                        .save()
+                        .then((user) => done(null, user));
                 }
             });
         }
