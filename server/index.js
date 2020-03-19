@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const keys = require('./config/keys');
 
 require('./models/User'); // Load models before passport uses them
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
