@@ -6,10 +6,14 @@ export default ({ input, label, meta: { touched, error, warning } }) => {
     return (
         <div>
             <label>{label}</label>
-            <input {...input} />
+            <input {...input} style={{ marginBottom: '5px' }} />
             {touched &&
-                ((error && <span style={{ color: 'red' }}>{error}</span>) ||
-                    (warning && <span>{warning}</span>))}
+                ((error && (
+                    <div className="red-text" style={{ marginBottom: '20px' }}>
+                        {error}
+                    </div>
+                )) ||
+                    (warning && <div>{warning}</div>))}
         </div>
     );
 };
