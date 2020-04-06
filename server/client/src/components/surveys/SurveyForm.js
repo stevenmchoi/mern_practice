@@ -46,9 +46,10 @@ class SurveyForm extends Component {
         return (
             <div>
                 <form
-                    onSubmit={this.props.handleSubmit((values) =>
-                        console.log(values)
-                    )}
+                    onSubmit={this.props.handleSubmit((values) => {
+                        this.props.updateSurveyState(values);
+                        this.props.updateShowFormReview(true);
+                    })}
                 >
                     {this.renderFields()}
                     <Link to="/surveys" className="red btn-flat white-text">
