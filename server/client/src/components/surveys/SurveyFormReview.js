@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const SurveyFormReview = ({ onCancel }) => {
+const SurveyFormReview = ({ onCancel, formValues }) => {
     return (
         <div>
             <h5>Please confirm your entries</h5>
@@ -11,4 +12,12 @@ const SurveyFormReview = ({ onCancel }) => {
     );
 };
 
-export default SurveyFormReview;
+function mapStateToProps({
+    form: {
+        surveyForm: { values },
+    },
+}) {
+    return { formValues: values };
+}
+
+export default connect(mapStateToProps)(SurveyFormReview);
