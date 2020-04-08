@@ -1,18 +1,11 @@
 import React from 'react';
 
-const SurveyFormReview = (props) => {
-    // console.log(props);
-
+const SurveyFormReview = ({ onCancel }) => {
     return (
         <div>
             <h5>Please confirm your entries</h5>
-            <button
-                onClick={() => {
-                    props.updateShowFormReview(false);
-                }}
-                className="red btn-flat white-text"
-            >
-                Cancel
+            <button className="yellow darken-3 btn-flat" onClick={onCancel}>
+                Back
             </button>
         </div>
     );
