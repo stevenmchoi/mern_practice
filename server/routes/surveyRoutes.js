@@ -11,6 +11,11 @@ module.exports = (app) => {
         res.send('Thanks for your feedback!');
     });
 
+    app.post('/api/surveys/webhooks', (req, res) => {
+        console.log('req.body :', req.body);
+        res.send(req.body);
+    });
+
     app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
         // Receive body from frontend
         const { title, subject, body, recipients } = req.body;
