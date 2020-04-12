@@ -11,6 +11,12 @@ module.exports = (app) => {
         res.send('Thanks for your feedback!');
     });
 
+    app.get('/api/surveys/:surveyID/:choice', (req, res) => {
+        console.log('surveyID :', surveyID);
+        console.log('choice :', choice);
+        res.send('Thanks for your feedback!');
+    });
+
     app.post('/api/surveys/webhooks', (req, res) => {
         console.log('req.body :', req.body);
         res.send(req.body);
