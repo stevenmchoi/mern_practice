@@ -15,6 +15,13 @@ mongoose.connect(keys.mongoURI, {
     useNewUrlParser: true,
 });
 
+// ^^^ Copy all of the above within "node" console to test mongoose queries:
+//   ex:
+//     const Survey = mongoose.model('surveys')
+//     Survey.find({}).then(console.log)
+//     Survey.find({ title: 'Final Test' }).then(console.log)
+//     Survey.find({ yes: 0 }).then(console.log)
+
 const app = express();
 
 app.use(bodyParser.json());
