@@ -7,43 +7,31 @@ class SurveyList extends Component {
         this.props.fetchSurveys();
     }
 
+    renderSurveys() {
+        return this.props.surveys
+            .reverse()
+            .map(({ _id, title, body, yes, no, dateSent }) => {
+                return (
+                    <div className="card darken-1" key={_id}>
+                        <div className="card-content">
+                            <span className="card-title">{title}</span>
+                            <p>{body}</p>
+                            <p className="right">
+                                Sent On:{' '}
+                                {new Date(dateSent).toLocaleDateString()}
+                            </p>
+                        </div>
+                        <div className="card-action">
+                            <a>Yes: {yes}</a>
+                            <a>No: {no}</a>
+                        </div>
+                    </div>
+                );
+            });
+    }
+
     render() {
-        return (
-            <div>
-                {this.props.surveys.map(
-                    ({ title, subject, body, yes, no, dateSent }) => {
-                        return (
-                            <div key={dateSent}>
-                                <div key="title">
-                                    <label>Title</label>
-                                    <div>{title}</div>
-                                </div>
-                                <div key="subject">
-                                    <label>Subject</label>
-                                    <div>{subject}</div>
-                                </div>
-                                <div key="body">
-                                    <label>Body</label>
-                                    <div>{body}</div>
-                                </div>
-                                <div key="yes">
-                                    <label>Yes</label>
-                                    <div>{yes}</div>
-                                </div>
-                                <div key="no">
-                                    <label>No</label>
-                                    <div>{no}</div>
-                                </div>
-                                <div key="dateSent">
-                                    <label>Date Sent</label>
-                                    <div>{dateSent}</div>
-                                </div>
-                            </div>
-                        );
-                    }
-                )}
-            </div>
-        );
+        return <div>{this.renderSurveys()}</div>;
     }
 }
 
